@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NotificationTest.AppShell"
+       xmlns:views="clr-namespace:NotificationTest.Views"
+        Shell.NavBarIsVisible="False"
+       Shell.TitleColor="White"
+       Shell.NavBarHasShadow="False"
+       Visual="Material">
+    <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+</Shell>

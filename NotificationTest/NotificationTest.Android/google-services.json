@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "190536900435",
+    "project_id": "notify-test-e70b9",
+    "storage_bucket": "notify-test-e70b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190536900435:android:bcba57e657d61254068ba6",
+        "android_client_info": {
+          "package_name": "com.angledimensions.notificationtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190536900435-4pg8ga6gq0u9s108amnii625div1uie1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4xQ4QbHe7hZPnobdJfPi65MMZaF6OHdg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190536900435-4pg8ga6gq0u9s108amnii625div1uie1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

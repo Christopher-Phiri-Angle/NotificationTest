@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:NotificationTest.ViewModels"
+             x:Class="NotificationTest.Views.MainPage"
+             Shell.ForegroundColor="White"
+             BackgroundColor="{AppThemeBinding Default={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+    <ContentPage.BindingContext>
+        <vm:MainViewModel x:Name="vm"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="TimeStyle" TargetType="Label" BasedOn="{StaticResource H5}">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="CharacterSpacing" Value="-1.2"/>
+            <Setter Property="Margin" Value="0,-10,0,0"/>
+        </Style>
+        <Style x:Key="TimeCaptionStyle" TargetType="Label" BasedOn="{StaticResource Caption}">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="Margin" Value="0,-10,0,0"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*,70">
+        <StackLayout Padding="16,0" Grid.Row="0">
+            <StackLayout>
+                <CollectionView ItemsSource="{Binding Notifications}" Margin="0,8,0,0" SelectionMode="Single" SelectedItem="{Binding SelectedNotification}" SelectionChangedCommand="{Binding OpenCommand}">
+                    <CollectionView.Header>
+                        <StackLayout>
+                            <Label Text="Morning" Style="{StaticResource H5}"/>
+                            <Label Text="Maliko" Style="{StaticResource H4}" FontAttributes="Bold"/>
+                            <StackLayout Padding="8">
+                                <Label Text="Active" Style="{StaticResource H6}" VerticalOptions="Center" />
+                                <Button VerticalOptions="Center" HorizontalOptions="Center" Text="View Completed" Command="{Binding ViewCompletedCommand}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </CollectionView.Header>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HasShadow="False" BackgroundColor="{AppThemeBinding Default={StaticResource LightSurface}, Dark={StaticResource DarkSurface}}" CornerRadius="20" Padding="0">
+                                <Grid ColumnDefinitions="20,*" Margin="10">
+                                    <StackLayout Grid.Column="0">
+                                        <BoxView WidthRequest="12" HeightRequest="12" CornerRadius="6" BackgroundColor="#F8F8F8"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1">
+                                        <Label Text="{Binding Title}" Style="{StaticResource SubTitle1}"/>
+                                        <Frame HorizontalOptions="FillAndExpand" CornerRadius="20" BackgroundColor="{StaticResource LightAccent}" Margin="0,8,0,0">
+                                            <Grid ColumnDefinitions="1*,1*,1*">
+                                                <StackLayout Grid.Column="0">
+                                                    <Label Text="{Binding Hours}" Style="{StaticResource TimeStyle}"/>
+                                                    <Label Text="Hours" Style="{StaticResource TimeCaptionStyle}"/>
+                                                </StackLayout>
+                                                <StackLayout Grid.Column="1">
+                                                    <Label Text="{Binding Minutes}" Style="{StaticResource TimeStyle}"/>
+                                                    <Label Text="Minutes" Style="{StaticResource TimeCaptionStyle}"/>
+                                                </StackLayout>
+                                                <StackLayout Grid.Column="2">
+                                                    <Label Text="{Binding Seconds}" Style="{StaticResource TimeStyle}"/>
+                                                    <Label Text="Seconds" Style="{StaticResource TimeCaptionStyle}"/>
+                                                </StackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </StackLayout>
+        <StackLayout Grid.Row="1" Padding="8">
+            <Frame Style="{StaticResource FrameSurface}" CornerRadius="100" HeightRequest="60" WidthRequest="60" VerticalOptions="Center" HorizontalOptions="Center">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CreateNoteCommand}"/>
+                </Frame.GestureRecognizers>
+                <Image Source="add.png" HeightRequest="60" WidthRequest="60"/>
+            </Frame>
+        </StackLayout>
+    </Grid>
+</ContentPage>
