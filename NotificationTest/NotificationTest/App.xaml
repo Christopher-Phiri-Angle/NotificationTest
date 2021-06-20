@@ -3,6 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NotificationTest.App">
     <Application.Resources>
+
+        <ResourceDictionary>
+            <DataTemplate x:Key="NotificationNormal">
+                <StackLayout Padding="6">
+                    <Frame BackgroundColor="AliceBlue">
+                        <Label Text="{Binding Title}"/>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+        
         <Color x:Key="LightBackground">#fFffff</Color>
         <Color x:Key="LightSurface">#E4E4E4</Color>
         <Color x:Key="LightAccent">#128EE1</Color>

@@ -4,20 +4,11 @@
              x:Class="NotificationTest.Views.CompletedPage" Padding="16">
     <StackLayout>
         <Label Text="Completed" Style="{StaticResource H5}" Padding="16"/>
-        <CollectionView ItemsSource="{Binding Notifications}" SelectionMode="Single" SelectedItem="{Binding SelectedNotification}" SelectionChangedCommand="{Binding OpenCommand}">
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                    <StackLayout Padding="6">
-                        <Frame BackgroundColor="AliceBlue">
-                            <Label Text="{Binding Title}"/>
-                        </Frame>
-                    </StackLayout>
-                </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+        <CollectionView  ItemTemplate="{StaticResource NotificationNormal}" ItemsSource="{Binding Notifications}" SelectionMode="Single" SelectedItem="{Binding SelectedNotification}" SelectionChangedCommand="{Binding OpenCommand}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+        </CollectionView>
     </StackLayout>
     
 </ContentPage>

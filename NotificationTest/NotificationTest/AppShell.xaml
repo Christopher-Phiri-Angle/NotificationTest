@@ -15,5 +15,8 @@
         <Tab Title="Completed" Icon="tick.png">
             <ShellContent ContentTemplate="{DataTemplate views:CompletedPage}"/>
         </Tab>
+        <Tab Title="API" Icon="api.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ApiPage}"/>
+        </Tab>
     </TabBar>
 </Shell>
