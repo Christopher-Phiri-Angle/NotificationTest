@@ -4,9 +4,6 @@
              x:Class="NotificationTest.Views.MainPage"
              Shell.ForegroundColor="White"
              BackgroundColor="{AppThemeBinding Default={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
-    <ContentPage.BindingContext>
-        <vm:MainViewModel x:Name="vm"/>
-    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Style x:Key="TimeStyle" TargetType="Label" BasedOn="{StaticResource H5}">
             <Setter Property="TextColor" Value="White"/>
@@ -21,7 +18,7 @@
             <Setter Property="Margin" Value="0,-10,0,0"/>
         </Style>
     </ContentPage.Resources>
-    <Grid RowDefinitions="*,70">
+    <Grid RowDefinitions="*">
         <StackLayout Padding="16,0" Grid.Row="0">
             <StackLayout>
                 <CollectionView ItemsSource="{Binding Notifications}" Margin="0,8,0,0" SelectionMode="Single" SelectedItem="{Binding SelectedNotification}" SelectionChangedCommand="{Binding OpenCommand}">
@@ -29,10 +26,6 @@
                         <StackLayout>
                             <Label Text="Morning" Style="{StaticResource H5}"/>
                             <Label Text="Maliko" Style="{StaticResource H4}" FontAttributes="Bold"/>
-                            <StackLayout Padding="8">
-                                <Label Text="Active" Style="{StaticResource H6}" VerticalOptions="Center" />
-                                <Button VerticalOptions="Center" HorizontalOptions="Center" Text="View Completed" Command="{Binding ViewCompletedCommand}"/>
-                            </StackLayout>
                         </StackLayout>
                     </CollectionView.Header>
                     <CollectionView.ItemsLayout>
@@ -71,13 +64,11 @@
                 </CollectionView>
             </StackLayout>
         </StackLayout>
-        <StackLayout Grid.Row="1" Padding="8">
-            <Frame Style="{StaticResource FrameSurface}" CornerRadius="100" HeightRequest="60" WidthRequest="60" VerticalOptions="Center" HorizontalOptions="Center">
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CreateNoteCommand}"/>
-                </Frame.GestureRecognizers>
-                <Image Source="add.png" HeightRequest="60" WidthRequest="60"/>
-            </Frame>
-        </StackLayout>
+        <Frame Style="{StaticResource FrameSurface}" BackgroundColor="{StaticResource LightAccent}" CornerRadius="100" HorizontalOptions="End" WidthRequest="30" HeightRequest="30" Margin="0,0,10,10" VerticalOptions="End">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CreateNoteCommand}"/>
+            </Frame.GestureRecognizers>
+            <Image Source="add.png" HeightRequest="30" WidthRequest="30"/>
+        </Frame>
     </Grid>
 </ContentPage>

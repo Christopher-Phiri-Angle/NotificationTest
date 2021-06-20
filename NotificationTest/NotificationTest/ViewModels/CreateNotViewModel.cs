@@ -1,4 +1,5 @@
 ﻿using NotificationTest.Data;
+using NotificationTest.Interfaces;
 using NotificationTest.Models;
 using System;
 using System.Windows.Input;
@@ -6,8 +7,10 @@ using Xamarin.Forms;
 
 namespace NotificationTest.ViewModels
 {
-    class CreateNotViewModel : BindableBase
+    public class CreateNotViewModel : BindableBase
     {
+        private INotificationStore _notificationStore;
+        private IPageService _pageService;
         public string Title { get; set; }
         public string Description { get; set; }
         private DateTime selectedDate = DateTime.Now;
@@ -19,7 +22,6 @@ namespace NotificationTest.ViewModels
 
             try
             {
-                NotificationDatabase database = await NotificationDatabase.Instance;
                 // validate
                 Notification notification = new Notification()
                 {
@@ -30,10 +32,8 @@ namespace NotificationTest.ViewModels
                     Completed = false,
                 };
 
-                _ = await database.SaveItemAsync(notification);
-                _ = await Application.Current.MainPage.Navigation.PopAsync();
-                // Save in db
-                // Go to main
+                _ = await _notificationStore.SaveItemAsync(notification);
+                _ = await _pageService.PopAsync();
 
             }
             catch (Exception)
@@ -43,5 +43,11 @@ namespace NotificationTest.ViewModels
             }
 
         });
+
+        public CreateNotViewModel(INotificationStore notificationStore, IPageService pageService)
+        {
+            _notificationStore = notificationStore;
+            _pageService = pageService;
+        }
     }
 }

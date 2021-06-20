@@ -2,11 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NotificationTest.Views.ViewNotificationPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <StackLayout Padding="16">
+        <Grid ColumnDefinitions="60,*" RowDefinitions="24,*">
+            <ImageButton Command="{Binding GoBackCommand}" Source="left.png" BackgroundColor="Transparent"/>
+            <Image IsVisible="{Binding Path=Notification.Completed}" Source="tick.png" Grid.Column="0" Grid.Row="1" WidthRequest="12" HeightRequest="12"/>
+            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Path=Notification.Title}" Style="{StaticResource H5}"/>
+        </Grid>
+        <Grid ColumnDefinitions="30,*" RowDefinitions="*,*" RowSpacing="10" Padding="8">
+            <Image Source="desc.png" Grid.Column="0" Grid.Row="0" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Label Grid.Column="1" Text="{Binding Path=Notification.Description}" Style="{StaticResource Body1}"/>
+            <Image Source="bell.png" Grid.Column="0" Grid.Row="1" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Path=Notification.Date}" Style="{StaticResource Body1}"  VerticalOptions="Center"/>
+            
+        </Grid>
+    </StackLayout>
 </ContentPage>

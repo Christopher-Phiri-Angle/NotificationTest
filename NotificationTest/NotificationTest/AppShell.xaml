@@ -6,6 +6,14 @@
         Shell.NavBarIsVisible="False"
        Shell.TitleColor="White"
        Shell.NavBarHasShadow="False"
+       Shell.TabBarTitleColor="{StaticResource LightAccent}"
        Visual="Material">
-    <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+    <TabBar>
+        <Tab Title="Active" Icon="bell.png">
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+        </Tab>
+        <Tab Title="Completed" Icon="tick.png">
+            <ShellContent ContentTemplate="{DataTemplate views:CompletedPage}"/>
+        </Tab>
+    </TabBar>
 </Shell>

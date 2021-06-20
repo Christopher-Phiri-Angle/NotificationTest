@@ -3,9 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:NotificationTest.ViewModels"
              x:Class="NotificationTest.Views.CreateNotificationPage"
               BackgroundColor="{AppThemeBinding Default={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
-    <ContentPage.BindingContext>
-        <vm:CreateNotViewModel x:Name="vm"/>
-    </ContentPage.BindingContext>
     <StackLayout Padding="16">
         <StackLayout>
             <Label Text="Create an Event" Style="{StaticResource H5}"/>
