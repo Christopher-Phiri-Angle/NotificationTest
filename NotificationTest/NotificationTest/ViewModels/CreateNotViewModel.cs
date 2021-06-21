@@ -12,6 +12,11 @@ namespace NotificationTest.ViewModels
         private INotificationStore _notificationStore;
         private IPageService _pageService;
         public string Title { get; set; }
+        private bool titleValid;
+        public bool TitleValid { get => titleValid; set { titleValid = value; OnPropertyChanged(nameof(TitleValid)); } }
+        public bool descValid { get; set; }
+        public bool DescValid { get => descValid; set { descValid = value; OnPropertyChanged(nameof(DescValid)); } }
+
         public string Description { get; set; }
         private DateTime selectedDate = DateTime.Now;
         public DateTime SelectedDate
@@ -55,6 +60,7 @@ namespace NotificationTest.ViewModels
             }
 
         });
+
 
         public CreateNotViewModel(INotificationStore notificationStore, IPageService pageService)
         {

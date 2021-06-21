@@ -2,20 +2,42 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:NotificationTest.ViewModels"
              x:Class="NotificationTest.Views.CreateNotificationPage"
-             xmlns:views="clr-namespace:NotificationTest.Controls"
-              BackgroundColor="{AppThemeBinding Default={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             BackgroundColor="{AppThemeBinding Default={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle"
+               TargetType="Entry">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+        <Style x:Key="ErrorMessage" TargetType="Label">
+            <Setter Property="TextColor" Value="Red"/>
+        </Style>
+        <ResourceDictionary>
+            <xct:InvertedBoolConverter x:Key="invertBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Padding="16">
         <StackLayout>
             <Label Text="Create an Event" Style="{StaticResource H5}"/>
         </StackLayout>
         <StackLayout Margin="0,10">
-            <Entry Placeholder="Title" Text="{Binding Title}"/>
-            <Editor Placeholder="Description" Text="{Binding Description}"/>
+            <Entry Placeholder="Title" Text="{Binding Title}">
+                <Entry.Behaviors>
+                    <xct:TextValidationBehavior x:Name="titleValidator" MinimumLength="10" InvalidStyle="{StaticResource InvalidEntryStyle}" IsValid="{Binding TitleValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Style="{StaticResource ErrorMessage}" IsVisible="{Binding TitleValid, Converter={StaticResource invertBoolConverter}}" Text="Please Enter Valid title.."/>
+            <Entry Placeholder="Description" Text="{Binding Description}">
+                <Entry.Behaviors>
+                    <xct:TextValidationBehavior x:Name="descValidator" MinimumLength="6" InvalidStyle="{StaticResource InvalidEntryStyle}" IsValid="{Binding DescValid}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label Style="{StaticResource ErrorMessage}" IsVisible="{Binding DescValid, Converter={StaticResource invertBoolConverter}}" Text="Please Enter Valid Description.."/>
             <Grid ColumnDefinitions="1*,1*" Margin="0,10">
                 <DatePicker Grid.Column="0" Date="{Binding SelectedDate}"/>
                 <TimePicker  Grid.Column="1" Time="{Binding SelectedTime}"/>
             </Grid>
         </StackLayout>
-        <Button Text="Save" Padding="8" Command="{Binding CreateNoteCommand}"/>
+        <Button Text="Save" Padding="8" Clicked="Save_Clicked"/>
     </StackLayout>
 </ContentPage>

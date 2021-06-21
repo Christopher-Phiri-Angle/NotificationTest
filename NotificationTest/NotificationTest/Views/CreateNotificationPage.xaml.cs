@@ -24,5 +24,15 @@ namespace NotificationTest.Views
             get { return BindingContext as CreateNotViewModel; }
             set { BindingContext = value; }
         }
+
+        private void Save_Clicked(object sender, System.EventArgs e)
+        {
+            titleValidator.ForceValidateCommand.Execute(null);
+            descValidator.ForceValidateCommand.Execute(null);
+            if (titleValidator.IsValid && descValidator.IsValid)
+            {
+                ViewModel.CreateNoteCommand.Execute(null);
+            }
+        }
     }
 }
