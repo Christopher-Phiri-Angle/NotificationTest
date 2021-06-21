@@ -13,7 +13,7 @@
             <Label Grid.Column="1" Text="{Binding Path=Notification.Description}" Style="{StaticResource Body1}"/>
             <Image Source="bell.png" Grid.Column="0" Grid.Row="1" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="Center"/>
             <Label Grid.Column="1" Grid.Row="1" Text="{Binding Path=Notification.Date}" Style="{StaticResource Body1}"  VerticalOptions="Center"/>
-            
         </Grid>
+        <Button Text="Delete" Command="{Binding DeleteCommand}"/>
     </StackLayout>
 </ContentPage>

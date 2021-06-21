@@ -14,6 +14,10 @@ namespace NotificationTest.ViewModels
         private IPageService _pageService;
 
         public ICommand GoBackCommand => new Command(() => _pageService.PopAsync());
+        public ICommand DeleteCommand => new Command(async () => {
+            await _notificationStore.DeleteItemAsync(Notification);
+            await _pageService.PopAsync();
+        });
         public Notification Notification { get; }
 
         public NotDetailViewModel(Notification notification, INotificationStore notificationStore, IPageService pageService)

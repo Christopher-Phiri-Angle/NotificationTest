@@ -14,15 +14,27 @@ namespace NotificationTest.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         private DateTime selectedDate = DateTime.Now;
-        public DateTime SelectedDate { get { return selectedDate; } set { selectedDate = value; } }
-        public TimeSpan selectedTime = new TimeSpan(DateTime.Now.Ticks);
-        public TimeSpan SelectedTime { get; set; }
+        public DateTime SelectedDate
+        {
+            get;
+            set;
+        } = DateTime.Today;
+
+        public TimeSpan SelectedTime
+        {
+            get;
+            set;
+        }
+
         public ICommand CreateNoteCommand => new Command(async () =>
         {
 
             try
             {
+                SelectedTime = TimeSpan.FromTicks(new DateTime(selectedDate.Date.Ticks).AddTicks(SelectedTime.Ticks).Ticks);
+                selectedDate = new DateTime(SelectedDate.TimeOfDay.Ticks).AddTicks(SelectedTime.Ticks);
                 // validate
+                System.Diagnostics.Debug.WriteLine($"Time: {SelectedTime}, Date: {selectedDate}");
                 Notification notification = new Notification()
                 {
                     Title = Title,

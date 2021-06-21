@@ -43,9 +43,9 @@ namespace NotificationTest.ViewModels
             {
                 foreach (Notification not in Notifications.ToList())
                 {
-                    TimeSpan timespan = DateTime.Now - not.Date;
+                    TimeSpan timespan = not.Date - DateTime.Now;
 
-                    if (DateTime.Compare(not.Date, DateTime.Now) >= 0)
+                    if (DateTime.Compare(not.Date, DateTime.Now) <= 0)
                     {
                         System.Diagnostics.Debug.WriteLine($"This is the stuff {not.Date}, now: {DateTime.Now} way: {DateTime.Compare(not.Date, DateTime.Now)}, {DateTime.Compare(DateTime.Now, not.Date)}");
                         SendNotification(not);
