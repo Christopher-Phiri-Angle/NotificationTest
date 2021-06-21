@@ -6,14 +6,24 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 
 namespace NotificationTest.ViewModels
 {
     public class ApiViewModel : BindableBase
     {
-        public ICommand LoadDataCommand { get; private set; }
         private RestService _restService;
+        public bool IsRefreshing { get; set; } = false;
+        public ICommand LoadDataCommand { get; private set; }
+        public ICommand RefreshCommand => new Command(async() => {
+            IsRefreshing = true;
+            OnPropertyChanged(nameof(IsRefreshing));
+            await LoadData();
+            IsRefreshing = false;
+            OnPropertyChanged(nameof(IsRefreshing));
+        });
+        public LayoutState CurrentState { get; set; } = LayoutState.None;
         public ObservableCollection<Notification> Notifications { get; set; } = new ObservableCollection<Notification>();
         public ApiViewModel()
         {
@@ -23,9 +33,22 @@ namespace NotificationTest.ViewModels
 
         private async Task LoadData()
         {
-            var notifications = await _restService.GetNotification();
-            Notifications = new ObservableCollection<Notification>(notifications);
-            OnPropertyChanged(nameof(Notifications));
+            CurrentState = LayoutState.Loading;
+            OnPropertyChanged(nameof(CurrentState));
+            try
+            {
+                var notifications = await _restService.GetNotification();
+                Notifications = new ObservableCollection<Notification>(notifications);
+                CurrentState = LayoutState.Success;
+                OnPropertyChanged(nameof(CurrentState));
+                OnPropertyChanged(nameof(Notifications));
+
+            }
+            catch (Exception)
+            {
+                CurrentState = LayoutState.Error;
+                OnPropertyChanged(nameof(CurrentState));
+            }
         }
     }
 }

@@ -19311,6 +19311,9 @@ namespace NotificationTest.Droid
 			// aapt resource value: 0x7F0700AC
 			public const int tooltip_frame_light = 2131165356;
 			
+			// aapt resource value: 0x7F0700AD
+			public const int warning = 2131165357;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
